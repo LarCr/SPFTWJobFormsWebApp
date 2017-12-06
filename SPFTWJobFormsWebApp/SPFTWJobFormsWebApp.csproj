@@ -192,7 +192,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CustomersController.cs" />
+    <Compile Include="Controllers\EngineersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\JobCardsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -301,6 +304,21 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Customers\Create.cshtml" />
+    <Content Include="Views\Customers\Delete.cshtml" />
+    <Content Include="Views\Customers\Details.cshtml" />
+    <Content Include="Views\Customers\Edit.cshtml" />
+    <Content Include="Views\Customers\Index.cshtml" />
+    <Content Include="Views\Engineers\Create.cshtml" />
+    <Content Include="Views\Engineers\Delete.cshtml" />
+    <Content Include="Views\Engineers\Details.cshtml" />
+    <Content Include="Views\Engineers\Edit.cshtml" />
+    <Content Include="Views\Engineers\Index.cshtml" />
+    <Content Include="Views\JobCards\Create.cshtml" />
+    <Content Include="Views\JobCards\Delete.cshtml" />
+    <Content Include="Views\JobCards\Details.cshtml" />
+    <Content Include="Views\JobCards\Edit.cshtml" />
+    <Content Include="Views\JobCards\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

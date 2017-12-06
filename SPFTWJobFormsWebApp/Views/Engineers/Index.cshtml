@@ -1,0 +1,51 @@
+﻿@model IEnumerable<SPFTWJobFormsWebApp.Models.Engineer>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.EngFname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EngSname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EngPhone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EngEmail)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.EngFname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EngSname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EngPhone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EngEmail)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.EngID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.EngID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.EngID })
+        </td>
+    </tr>
+}
+
+</table>
