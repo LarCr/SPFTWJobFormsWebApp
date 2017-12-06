@@ -1,0 +1,224 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SPFTWDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustId" />
+          </Key>
+          <Property Name="CustId" Type="int" Nullable="false" />
+          <Property Name="CustName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="CustAddress" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CustCity" Type="nvarchar" MaxLength="50" />
+          <Property Name="CustCountry" Type="nvarchar" MaxLength="50" />
+          <Property Name="CustPhone" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="CustEmail" Type="nvarchar" MaxLength="80" />
+        </EntityType>
+        <EntityType Name="Engineer">
+          <Key>
+            <PropertyRef Name="EngID" />
+          </Key>
+          <Property Name="EngID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EngFname" Type="nvarchar" MaxLength="50" />
+          <Property Name="EngSname" Type="nvarchar" MaxLength="50" />
+          <Property Name="EngPhone" Type="nvarchar" MaxLength="20" />
+          <Property Name="EngEmail" Type="nvarchar" MaxLength="80" Nullable="false" />
+        </EntityType>
+        <EntityType Name="JobCard">
+          <Key>
+            <PropertyRef Name="JobId" />
+          </Key>
+          <Property Name="JobId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustId" Type="int" />
+          <Property Name="EngId" Type="int" />
+          <Property Name="JobDetails" Type="nvarchar(max)" />
+          <Property Name="SiteContact" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PartsUsed" Type="nvarchar(max)" />
+          <Property Name="Date" Type="date" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_JobCard_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+          <End Role="JobCard" Type="Self.JobCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustId" />
+            </Principal>
+            <Dependent Role="JobCard">
+              <PropertyRef Name="CustId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobCard_Engineer">
+          <End Role="Engineer" Type="Self.Engineer" Multiplicity="0..1" />
+          <End Role="JobCard" Type="Self.JobCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Engineer">
+              <PropertyRef Name="EngID" />
+            </Principal>
+            <Dependent Role="JobCard">
+              <PropertyRef Name="EngId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SPFTWDatabaseModelStoreContainer">
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Engineer" EntityType="Self.Engineer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JobCard" EntityType="Self.JobCard" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_JobCard_Customer" Association="Self.FK_JobCard_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="JobCard" EntitySet="JobCard" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobCard_Engineer" Association="Self.FK_JobCard_Engineer">
+            <End Role="Engineer" EntitySet="Engineer" />
+            <End Role="JobCard" EntitySet="JobCard" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SPFTWDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustId" />
+          </Key>
+          <Property Name="CustId" Type="Int32" Nullable="false" />
+          <Property Name="CustName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CustAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CustCity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CustCountry" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CustPhone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CustEmail" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="JobCards" Relationship="SPFTWDatabaseModel.FK_JobCard_Customer" FromRole="Customer" ToRole="JobCard" />
+        </EntityType>
+        <EntityType Name="Engineer">
+          <Key>
+            <PropertyRef Name="EngID" />
+          </Key>
+          <Property Name="EngID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EngFname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EngSname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EngPhone" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="EngEmail" Type="String" MaxLength="80" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="JobCards" Relationship="SPFTWDatabaseModel.FK_JobCard_Engineer" FromRole="Engineer" ToRole="JobCard" />
+        </EntityType>
+        <EntityType Name="JobCard">
+          <Key>
+            <PropertyRef Name="JobId" />
+          </Key>
+          <Property Name="JobId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustId" Type="Int32" />
+          <Property Name="EngId" Type="Int32" />
+          <Property Name="JobDetails" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SiteContact" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PartsUsed" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Customer" Relationship="SPFTWDatabaseModel.FK_JobCard_Customer" FromRole="JobCard" ToRole="Customer" />
+          <NavigationProperty Name="Engineer" Relationship="SPFTWDatabaseModel.FK_JobCard_Engineer" FromRole="JobCard" ToRole="Engineer" />
+        </EntityType>
+        <EntityContainer Name="SPFTWDatabaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="Engineers" EntityType="Self.Engineer" />
+          <EntitySet Name="JobCards" EntityType="Self.JobCard" />
+          <AssociationSet Name="FK_JobCard_Customer" Association="SPFTWDatabaseModel.FK_JobCard_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="JobCard" EntitySet="JobCards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobCard_Engineer" Association="SPFTWDatabaseModel.FK_JobCard_Engineer">
+            <End Role="Engineer" EntitySet="Engineers" />
+            <End Role="JobCard" EntitySet="JobCards" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="FK_JobCard_Customer">
+          <End Type="SPFTWDatabaseModel.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="SPFTWDatabaseModel.JobCard" Role="JobCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustId" />
+            </Principal>
+            <Dependent Role="JobCard">
+              <PropertyRef Name="CustId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobCard_Engineer">
+          <End Type="SPFTWDatabaseModel.Engineer" Role="Engineer" Multiplicity="0..1" />
+          <End Type="SPFTWDatabaseModel.JobCard" Role="JobCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Engineer">
+              <PropertyRef Name="EngID" />
+            </Principal>
+            <Dependent Role="JobCard">
+              <PropertyRef Name="EngId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SPFTWDatabaseModelStoreContainer" CdmEntityContainer="SPFTWDatabaseEntities">
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="SPFTWDatabaseModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="CustId" ColumnName="CustId" />
+                <ScalarProperty Name="CustName" ColumnName="CustName" />
+                <ScalarProperty Name="CustAddress" ColumnName="CustAddress" />
+                <ScalarProperty Name="CustCity" ColumnName="CustCity" />
+                <ScalarProperty Name="CustCountry" ColumnName="CustCountry" />
+                <ScalarProperty Name="CustPhone" ColumnName="CustPhone" />
+                <ScalarProperty Name="CustEmail" ColumnName="CustEmail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Engineers">
+            <EntityTypeMapping TypeName="SPFTWDatabaseModel.Engineer">
+              <MappingFragment StoreEntitySet="Engineer">
+                <ScalarProperty Name="EngID" ColumnName="EngID" />
+                <ScalarProperty Name="EngFname" ColumnName="EngFname" />
+                <ScalarProperty Name="EngSname" ColumnName="EngSname" />
+                <ScalarProperty Name="EngPhone" ColumnName="EngPhone" />
+                <ScalarProperty Name="EngEmail" ColumnName="EngEmail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobCards">
+            <EntityTypeMapping TypeName="SPFTWDatabaseModel.JobCard">
+              <MappingFragment StoreEntitySet="JobCard">
+                <ScalarProperty Name="JobId" ColumnName="JobId" />
+                <ScalarProperty Name="CustId" ColumnName="CustId" />
+                <ScalarProperty Name="EngId" ColumnName="EngId" />
+                <ScalarProperty Name="JobDetails" ColumnName="JobDetails" />
+                <ScalarProperty Name="SiteContact" ColumnName="SiteContact" />
+                <ScalarProperty Name="PartsUsed" ColumnName="PartsUsed" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
