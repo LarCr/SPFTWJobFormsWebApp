@@ -9,7 +9,7 @@
           <Key>
             <PropertyRef Name="CustId" />
           </Key>
-          <Property Name="CustId" Type="int" Nullable="false" />
+          <Property Name="CustId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="CustName" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="CustAddress" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="CustCity" Type="nvarchar" MaxLength="50" />
@@ -84,7 +84,7 @@
           <Key>
             <PropertyRef Name="CustId" />
           </Key>
-          <Property Name="CustId" Type="Int32" Nullable="false" />
+          <Property Name="CustId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CustName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CustAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CustCity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />

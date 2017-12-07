@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'c:\users\sector7g\source\repos\SPFTWJobFormsWebApp\SPFTWJobFormsWebApp\Models\SPFTWJobCardDBModel.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\Sector7G\source\repos\SPFTWJobFormsWebApp\SPFTWJobFormsWebApp\Models\SPFTWJobCardDBModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.
